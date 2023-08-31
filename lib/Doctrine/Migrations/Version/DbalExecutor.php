@@ -305,9 +305,10 @@ final class DbalExecutor implements Executor
             } else {
                 $this->connection->executeQuery($query->getStatement(), $query->getParameters(), $query->getTypes());
             }
+
             $stopwatchEvent->stop();
 
-            if (!$configuration->getTimeAllQueries()) {
+            if (! $configuration->getTimeAllQueries()) {
                 continue;
             }
 
