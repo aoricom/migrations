@@ -11,7 +11,7 @@ use function count;
 /**
  * The Query wraps the sql query, parameters and types.
  */
-final class Query
+class Query
 {
     private string $statement;
 

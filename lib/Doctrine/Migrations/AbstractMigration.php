@@ -13,7 +13,9 @@ use Doctrine\Migrations\Exception\AbortMigration;
 use Doctrine\Migrations\Exception\IrreversibleMigration;
 use Doctrine\Migrations\Exception\MigrationException;
 use Doctrine\Migrations\Exception\SkipMigration;
+use Doctrine\Migrations\Query\PreparableQuery;
 use Doctrine\Migrations\Query\Query;
+use Doctrine\Migrations\Query\RawQuery;
 use Psr\Log\LoggerInterface;
 
 use function sprintf;
@@ -144,7 +146,14 @@ abstract class AbstractMigration
         array $params = [],
         array $types = []
     ): void {
-        $this->plannedSql[] = new Query($sql, $params, $types);
+        $this->plannedSql[] = new PreparableQuery($sql, $params, $types);
+    }
+
+    protected function addRawSql(
+        string $sql
+
+    ): void {
+        $this->plannedSql[] = new RawQuery($sql);
     }
 
     /**

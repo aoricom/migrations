@@ -295,6 +295,7 @@ final class DbalExecutor implements Executor
 
             $stopwatchEvent = $this->stopwatch->start('query');
             // executeQuery() must be used here because $query might return a result set, for instance REPAIR does
+            $this->connection->executeStatement($query->getStatement());
             $this->connection->executeQuery($query->getStatement(), $query->getParameters(), $query->getTypes());
             $stopwatchEvent->stop();
 
